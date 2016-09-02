@@ -6,6 +6,10 @@ using Senparc.Weixin.QY.Containers;
 using Senparc.Weixin.Helpers;
 using System.Configuration;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
+using Senparc.Weixin.QY.AdvancedAPIs;
+using Senparc.Weixin.QY;
 
 namespace QyWexin
 {
@@ -41,13 +45,27 @@ namespace QyWexin
 
             try {
 
-                RequestUtility.SetHttpProxy(proxyHost, proxyPort, proxyName, proxyPassword);
-
+                //RequestUtility.SetHttpProxy(proxyHost, proxyPort, proxyName, proxyPassword);
                 string token = AccessTokenContainer.TryGetToken(corpId, corpSecret);
 
-                var urlFormat = "https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token={0}";
+                //上传图片
+                if(!string.IsNullOrWhiteSpace(this.tPicPath.Text))
+                {
+                    if(!File.Exists(this.tPicPath.Text))
+                    {
+                        this.tRtnMsg.Text = "图片路径不存在！";
+                        return;
+                    }
+                    else
+                    {
+                        string media = string.Format("Content-Disposition:form-data;name=\"file\";filename=\"{0}\"\r\nContent-Type:application/octet-stream\r\n\r\n", this.tPicPath.Text);
+                        var uploadResult = MediaApi.UploadimgMedia(token, media);
+                        this.tUploadPicUrl.Text = uploadResult.url;
+                    }
+                }
 
-                var result = CommonJsonSend.Send(token, urlFormat, ConstructNewsData());
+                var sendNewsUrl = "https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token={0}";
+                var result = CommonJsonSend.Send(token, sendNewsUrl, ConstructNewsData());
                 this.tRtnMsg.Text = result.errcode + "  " + result.errmsg;
             }
             catch(Exception ex)
@@ -70,6 +88,7 @@ namespace QyWexin
             article.title = this.tTitle.Text;
             article.description = this.tDescription.Text;
             article.url = this.tUrl.Text;
+            article.picurl = this.tUploadPicUrl.Text;
             news.articles.Add(article);
 
             data.news = news;
@@ -85,6 +104,15 @@ namespace QyWexin
         private void SetConfig(string key, string value)
         {
 
+        }
+
+        private void btnUpload_Click(object sender, EventArgs e)
+        {
+            DialogResult dr = openFileDialog1.ShowDialog();
+            if (dr == DialogResult.OK)
+            {
+                this.tPicPath.Text = openFileDialog1.FileName;
+            }
         }
     }
 }

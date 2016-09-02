@@ -5,9 +5,9 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QyWexin", "QyWexin.csproj", "{878BD706-FF8D-4D24-93EE-66AC7944292F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Senparc.Weixin.QY", "..\..\git\WeiXinMPSDK\src\Senparc.Weixin.QY\Senparc.Weixin.QY\Senparc.Weixin.QY.csproj", "{2CA35598-F1A1-4DC9-AA20-A4346BFCB954}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Senparc.Weixin.QY", "..\..\WeiXinMPSDK\src\Senparc.Weixin.QY\Senparc.Weixin.QY\Senparc.Weixin.QY.csproj", "{2CA35598-F1A1-4DC9-AA20-A4346BFCB954}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Senparc.Weixin", "..\..\git\WeiXinMPSDK\src\Senparc.Weixin\Senparc.Weixin\Senparc.Weixin.csproj", "{814092CD-9CD0-4FB7-91E8-D147F476F1FB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Senparc.Weixin", "..\..\WeiXinMPSDK\src\Senparc.Weixin\Senparc.Weixin\Senparc.Weixin.csproj", "{814092CD-9CD0-4FB7-91E8-D147F476F1FB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

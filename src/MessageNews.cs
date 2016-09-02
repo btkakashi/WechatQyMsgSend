@@ -28,5 +28,6 @@ namespace QyWexin
         public string title;
         public string description;
         public string url;
+        public string picurl;
     }
 }
